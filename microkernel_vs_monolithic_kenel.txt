@@ -1,0 +1,19 @@
+Microkernel:
+
+A microkernel keeps the user services and kernel services in different address spaces. It is a minimalistic approach to designing an operating system. Only the most essential functions are included in the kernel, such as inter process communication, basic scheduling and low level memory management. Other services like device drivers, file systems, and networking run in user space as separate processes.
+
+Advantages: Easier to extend and port, smaller and modular, and is more reliable since failures in user space do not crash the whole system.
+
+Disadvantages: Its execution is slower due to frequent message passing between user space and kernel.
+
+Example: Mach (the kernel in macOS).
+
+Monolithic Kernel:
+
+In a monolithic kernel, the entire operating system runs as a single program in kernel mode. The user services and kernel services are implemented in the same address space. This design can make it work faster because all components can interact directly.
+
+Advantages: Its speed of execution is faster, and efficient system performance.
+
+Disadvantages: It has a large size and it is hard to maintain or extend, it is also hard to port to other systems. It is more prone to errors and bugs and a single bug can crash the whole system.
+
+Example: Linux.

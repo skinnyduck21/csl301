@@ -1,0 +1,2 @@
+Reason: Because of SWITCH_ON_END, I/O processes wait for long CPU workload to finish, increasing idle time and total execution time.
+CPU only switches when the current process finishes completely, so after initial I/O, the CPU sits idle until it is done, causing long idle gaps and lower CPU utilization.

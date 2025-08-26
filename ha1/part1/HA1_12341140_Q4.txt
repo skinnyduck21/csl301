@@ -1,0 +1,33 @@
+When the program starts, there is only 1 parent process.
+
+First fork(): Creates the first child. Now there are 2 processes — parent and first child.
+
+The first child executes its own printf() and does not execute the second fork.
+
+Second fork(): Executed only by the original parent, creating the second child. Now there are 3 processes in total:
+
+Parent (original)
+
+First child (from first fork)
+
+Second child (from second fork)
+
+Process hierarchy:
+
+Parent (Keshav Mishra)
+├── First Child
+└── Second Child
+
+
+PID relationships in output:
+
+getpid() returns the current process’s PID.
+
+getppid() returns the PID of the process’s parent.
+
+Both children show the parent’s PID as the original parent’s PID.
+
+The parent’s parent PID (getppid()) is the shell or terminal process.
+
+Conclusion:
+Sequential forking creates one child at a time under the same parent, resulting in a flat process tree with all children at the same hierarchy level. The total number of processes is 1 (parent) + number_of_children.

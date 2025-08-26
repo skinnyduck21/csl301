@@ -1,0 +1,69 @@
+Step 1:
+In proc.h:
+
+int userflag;
+
+Step 2:
+In syscall.h:
+
+#define SYS_setflag  26
+#define SYS_getflag  27
+
+Step 3:
+In syscall.c, added extern declarations:
+
+extern int sys_setflag(void);
+extern int sys_getflag(void);
+
+In syscall.c, added to syscall table:
+[SYS_setflag] sys_setflag,
+[SYS_getflag] sys_getflag,
+
+Step 4:
+In sysproc.c:
+
+int sys_setflag(void) {
+    int flag;
+    if (argint(0, &flag) < 0)
+        return -1;
+    myproc()->userflag = flag;
+    return 0;
+}
+
+int sys_getflag(void) {
+    return myproc()->userflag;
+}
+
+Step 5:
+In user.h:
+
+int setflag(int);
+int getflag(void);
+
+Step 6:
+In usys.S:
+
+SYSCALL(setflag)
+SYSCALL(getflag)
+
+Step 7:
+Created a new testflags.c file with the following content:
+
+#include "types.h"
+#include "stat.h"
+#include "user.h"
+
+int main(void) {
+    setflag(1140);
+    printf(1, "Flag after set to 1140: %d\n", getflag());
+
+    setflag(4321);
+    printf(1, "Flag after set to 4321: %d\n", getflag());
+
+    exit();
+}
+
+
+Final step:
+In Makefile, added this in UPGROS:
+    _testflags\

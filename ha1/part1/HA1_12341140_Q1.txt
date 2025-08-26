@@ -1,0 +1,14 @@
+When fork() is called, the operating system creates a child process that is an almost exact copy of the parent process. However, memory is not physically duplicated immediately. The OS uses copy-on-write. Initially, both processes share the same physical memory pages. When either process modifies a variable, the OS makes a separate copy of that page for that process.
+
+Because of this, the parent’s change to global_var (adding 5) and the child’s change to global_var (adding 10) occur in separate memory copies. These changes do not affect each other.
+
+Memory Segments after fork():
+
+Code segment: Shared between parent and child (read-only).
+
+Data segment (globals/statics): Logically copied; copy-on-write ensures independence.
+
+Stack: Duplicated so local variables are separate.
+
+Conclusion:
+Changes to global variables in one process do not affect the other process after fork() because each process maintains its own independent copy of the variable in memory.

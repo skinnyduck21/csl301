@@ -1,0 +1,20 @@
+Initially, there is only 1 process.
+
+First fork(): Creates 1 new process, so now 2 processes exist.
+
+Second fork(): Both of these processes execute the second fork(), each creating a new child. This doubles the total to 4 processes.
+
+Process Tree Structure:
+
+Original Parent
+├── Child 1 (from first fork)
+│   └── Grandchild 1 (from second fork)
+└── Child 2 (from second fork by original parent)
+
+
+The exact parent-child mapping for the second fork depends on execution order, but the end result is always 4 processes.
+
+After n successive fork() calls, if each process continues execution and calls the next fork(), the total number of processes is = 2^n
+
+For n = 2:
+    2^n = 2^2 = 4 processes

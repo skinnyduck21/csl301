@@ -1,0 +1,20 @@
+When a process opens a file, the OS assigns it a file descriptor, which refers to an entry in the system wide open file table. This entry contains the current file offset and file status flags.
+
+When fork() is called:
+
+The child process inherits a copy of the parent’s file descriptor table.
+
+Both parent and child file descriptors point to the same open file table entry.
+
+Therefore, they share the same file offset.
+
+When both processes write to the file:
+
+Writes are made at the shared file offset, and the offset advances after each write.
+
+If the writes are small and atomic (like in my code), the output will contain both messages without overlap, but the order depends on process scheduling.
+
+Larger or non-atomic writes can result in interleaving of bytes.
+
+Conclusion:
+After fork(), parent and child share the same open file description, meaning writes affect the same file offset. This leads to a combined output file containing both processes’ messages, though the order may vary.

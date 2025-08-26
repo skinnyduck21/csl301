@@ -1,0 +1,2 @@
+Reason: IO_RUN_LATER delays scheduling of I/O-completed processes until the CPU becomes idle, creating idle gaps
+When input Output is finished, the process waits in the ready queue until the current CPU job finishes, therefore lower I/O busy time 
