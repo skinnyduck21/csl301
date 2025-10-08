@@ -1,0 +1,24 @@
+Some trivia about different system calls:
+
+-fork() creates a new process by duplicating the calling process. The new process is called the child process.
+
+-open() opens a file and returns a file descriptor, which is used for subsequent read/write operations.
+
+-write() sends data from a buffer to a file descriptor
+
+-printf() is not a system call — it is a library function (from stdio.h) that eventually uses write() internally to print to stdout.
+
+-wait() makes the parent process pause until one of its child processes finishes.
+
+-waitpid() waits for a specific child process (identified by PID).
+
+-close() closes a file descriptor, freeing it for reuse.
+
+-pipe() Creates a unidirectional communication channel between processes.
+
+-execl(), execvp(), etc. (family of exec() calls)  All replace the current process image with a new program. That means the original program is wiped from memory and replaced by another.
+
+Write a program that:
+-Forks a child.
+-In the child, use exec() (try execl() first) to run /bin/ls or /bin/date.
+-In the parent, print "Parent finished".
